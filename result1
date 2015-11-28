@@ -1,0 +1,122 @@
+<?php
+if(isset($_POST["year"])){ 
+$year=$_POST['year'];
+$top=$_POST['top'];
+$gen=$_POST['gen'];
+echo '<h2 style="text-align:center">Popular Names by Birth Year - '.$year.'</h2>';
+if($gen!="Both")
+{
+$filename=$gen.'_cy'.$year.'_top.csv';
+$file_location='Baby Names 1944-2013/'.$filename;
+$array = file($file_location) or die("can't open file");
+foreach($array as $key => $value) {
+        $array[$key]=explode(',',$value);
+    }
+	$i=0;
+	echo '<div class="col-md-10">
+	<table class="table table-bordered"><tr class="success">
+	<td>Name</td>
+	<td>No of Births</td>
+	<td>Name rankings</td>
+	</tr>';
+	foreach($array as $key => $value){
+		if($i>$top)
+		{
+			break;	
+		}
+		else{
+			$i++;
+			if($i==1)
+			{
+				
+			}
+			else{
+		echo '<tr>
+		<td>'.$array[$key][0].'</td>
+		<td>'.$array[$key][1].'</td>';
+		$array[$key][2]= str_replace("=","",$array[$key][2]);
+
+		echo '<td>'.$array[$key][2].'</td>
+		</tr>';	
+	}
+	}
+	}
+		echo '</table></div>';
+
+}
+else{
+$file_location1='Baby Names 1944-2013/male_cy'.$year.'_top.csv';
+$file_location2='Baby Names 1944-2013/female_cy'.$year.'_top.csv';
+$array1 = file($file_location1) or die("can't open file");
+foreach($array1 as $key => $value) {
+        $array1[$key]=explode(',',$value);
+    }
+	$i=0;
+	echo '<div class="col-md-6"><h2>Male</h2>	';
+	echo '<table class="table table-bordered"><tr class="success">
+	<td>Name</td>
+	<td>No of Births</td>
+	<td>Name rankings</td>
+	</tr>';
+	foreach($array1 as $key => $value){
+		if($i>$top)
+		{
+			break;	
+		}
+		else{
+			$i++;
+			if($i==1)
+			{
+				
+			}
+			else{
+		echo '<tr>
+		<td>'.$array1[$key][0].'</td>
+		<td>'.$array1[$key][1].'</td>';
+		$array1[$key][2]= str_replace("=","",$array1[$key][2]);
+
+		echo '<td>'.$array1[$key][2].'</td>
+		</tr>';	
+	}
+	}
+	}
+		echo '</table></div>';
+$array2 = file($file_location2) or die("can't open file");
+foreach($array2 as $key => $value) {
+        $array2[$key]=explode(',',$value);
+    }
+	$i=0;
+	echo '<div class="col-md-6"><h2>Female</h2>
+	';
+	echo '<table class="table table-bordered"><tr class="success">
+	<td>Name</td>
+	<td>No of Births</td>
+	<td>Name rankings</td>
+	</tr>';
+	foreach($array2 as $key => $value){
+		if($i>$top)
+		{
+			break;	
+		}
+		else{
+			$i++;
+			if($i==1)
+			{
+				
+			}
+			else{
+		echo '<tr>
+		<td>'.$array2[$key][0].'</td>
+		<td>'.$array2[$key][1].'</td>';
+		$array2[$key][2]= str_replace("=","",$array2[$key][2]);
+
+		echo '<td>'.$array2[$key][2].'</td>
+		</tr>';	
+	}
+	}
+	}
+		echo '</table></div>';
+
+}
+}
+    ?>
